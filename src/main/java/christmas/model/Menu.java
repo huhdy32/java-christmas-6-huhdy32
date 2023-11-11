@@ -26,6 +26,14 @@ public enum Menu {
         this.category = category;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
     enum Category {
         에피타이저,
         메인,
