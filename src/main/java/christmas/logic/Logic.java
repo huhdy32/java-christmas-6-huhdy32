@@ -28,7 +28,9 @@ public class Logic {
     }
 
     private Reservation getReservation() {
-        return new Reservation(getOrders(),getReservationDate());
+        int reservationDate = getReservationDate();
+        List orders = getOrders();
+        return new Reservation(orders, reservationDate);
     }
 
     private List<Menu> getOrders() {
