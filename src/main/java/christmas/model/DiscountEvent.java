@@ -15,7 +15,7 @@ public enum DiscountEvent {
             100) {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
-            return 1000 + getDiscountAmount() * reservationDate;
+            return 1000 + getUnitAmount() * reservationDate;
         }
     },
     WEEKDAY_DISCOUNT(Set.of(
@@ -27,13 +27,9 @@ public enum DiscountEvent {
             2023) {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
-            int dessertCount = 0;
-            for (Menu menu : menus) {
-                if (menu.getCategory() == Menu.Category.디저트) {
-                    dessertCount++;
-                }
-            }
-            return dessertCount * getDiscountAmount();
+            return (int) menus.stream()
+                    .filter(menu -> menu.getCategory() == Menu.Category.디저트)
+                    .count() * getUnitAmount();
         }
     },
     WEEKEND_DISCOUNT(Set.of(
@@ -43,13 +39,9 @@ public enum DiscountEvent {
             2023) {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
-            int mainCount = 0;
-            for (Menu menu : menus) {
-                if (menu.getCategory() == Menu.Category.메인) {
-                    mainCount++;
-                }
-            }
-            return mainCount * getDiscountAmount();
+            return (int) menus.stream()
+                    .filter(menu -> menu.getCategory() == Menu.Category.메인)
+                    .count() * getUnitAmount();
         }
     },
     SPECIAL_DISCOUNT(Set.of(
@@ -58,26 +50,27 @@ public enum DiscountEvent {
             1000) {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
-            return getDiscountAmount();
+            return getUnitAmount();
         }
     };
     private Set<Integer> applyDate;
     private Menu.Category targetCategory;
-    private int discountAmount;
+    private int unitAmount;
 
-    abstract int getDiscount(int reservationDate, List<Menu> menus);
 
     DiscountEvent(Set<Integer> applyDate, Menu.Category targetCategory, int discountAmount) {
         this.applyDate = applyDate;
         this.targetCategory = targetCategory;
-        this.discountAmount = discountAmount;
+        this.unitAmount = discountAmount;
     }
 
-    int getDiscountAmount() {
-        return this.discountAmount;
+    abstract int getDiscount(int reservationDate, List<Menu> menus);
+
+    int getUnitAmount() {
+        return this.unitAmount;
     }
 
-    public static List<DiscountEvent> getDiscount(int reservationDate) {
+    public static List<DiscountEvent> getEvents(int reservationDate) {
         return Arrays.stream(DiscountEvent.values())
                 .filter(discount -> discount.applyDate.contains(reservationDate))
                 .toList();
