@@ -1,6 +1,5 @@
-package christmas.badge;
+package christmas.domain;
 
-import christmas.domain.Badge;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,7 +13,7 @@ public class BadgeTest {
     @ValueSource(ints = {30_000, 40_000, 50_000, 20_000})
     void provide_Santa_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.SANTA);
+                .isEqualTo(Badge.산타);
     }
 
     @DisplayName("트리 반환 테스트")
@@ -22,7 +21,7 @@ public class BadgeTest {
     @ValueSource(ints = {10_000, 19_999})
     void provide_Tree_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.TREE);
+                .isEqualTo(Badge.트리);
     }
 
     @DisplayName("별 반환 테스트")
@@ -30,7 +29,7 @@ public class BadgeTest {
     @ValueSource(ints = {5_000, 9_999})
     void provide_Star_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.STAR);
+                .isEqualTo(Badge.별);
     }
 
     @DisplayName("없음 반환 테스트")
@@ -38,6 +37,6 @@ public class BadgeTest {
     @ValueSource(ints = {0, 4999, -500})
     void provide_None_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.NONE);
+                .isEqualTo(Badge.없음);
     }
 }
