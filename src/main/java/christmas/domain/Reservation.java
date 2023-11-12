@@ -6,12 +6,13 @@ import java.util.List;
 
 public class Reservation {
     private boolean eventTarget = true;
-    private List<Menu> menus;
-    private int date;
+    private final List<Menu> menus;
+    private final int date;
 
     public Reservation(List<Menu> menus, int date) {
         this.menus = menus;
         this.date = date;
+        isEventTarget();
     }
 
     private void isEventTarget() {
