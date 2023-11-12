@@ -11,13 +11,31 @@ public class User {
         this.reservationDate = reservationDate;
     }
 
-    public int getTotalAmount() {
+    public int getTotalOrderAmount() {
         return menus.stream()
                 .mapToInt(menu -> menu.getCost())
                 .sum();
     }
 
-    public GiftMenu getGiftMenu() {
-        return GiftMenu.getGift(getTotalAmount());
+    public GiftMenu getGift() {
+        return GiftMenu.getGift(getTotalOrderAmount());
+    }
+
+    public List<DiscountEvent> getDisCountEvents() {
+        return DiscountEvent.getEvents(reservationDate);
+    }
+
+    public int getTotalDiscountAmount() {
+        return getDisCountEvents().stream()
+                .mapToInt(discount -> discount.getDiscount(reservationDate, menus))
+                .sum();
+    }
+
+    public int getTotalBenefitAmount() {
+        return getGift().getBenefitAmount() + getTotalDiscountAmount();
+    }
+
+    public int getTotalPayAmount() {
+        return getTotalOrderAmount() - getTotalDiscountAmount();
     }
 }
