@@ -34,7 +34,7 @@ public enum Menu {
         return category;
     }
 
-    enum Category {
+    public enum Category {
         에피타이저,
         메인,
         디저트,
