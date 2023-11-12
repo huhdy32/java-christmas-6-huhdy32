@@ -14,6 +14,10 @@ public enum GiftMenu {
         this.minimum_Amount_For_Free_Gift = minimum_Amount_For_Free_Gift;
     }
 
+    int getBenefitAmount() {
+        return this.menu.getCost();
+    }
+
     public static GiftMenu getGift(int amount) {
         return Arrays.stream(GiftMenu.values())
                 .filter(giftMenu -> giftMenu.minimum_Amount_For_Free_Gift <= amount)
