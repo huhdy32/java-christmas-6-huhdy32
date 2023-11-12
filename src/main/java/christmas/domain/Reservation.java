@@ -1,18 +1,17 @@
 package christmas.domain;
 
 import christmas.logic.Logic;
-import christmas.utils.ErrorMessage;
 
 import java.util.List;
 
 public class Reservation {
     private boolean eventTarget = true;
     private List<Menu> menus;
-    private int reservationDate;
+    private int date;
 
-    public Reservation(List<Menu> menus, int reservationDate) {
+    public Reservation(List<Menu> menus, int date) {
         this.menus = menus;
-        this.reservationDate = reservationDate;
+        this.date = date;
     }
 
     private void isEventTarget() {
@@ -32,12 +31,12 @@ public class Reservation {
     }
 
     public List<DiscountEvent> getDisCountEvents() {
-        return DiscountEvent.getEvents(reservationDate);
+        return DiscountEvent.getEvents(date);
     }
 
     public int getTotalDiscountAmount() {
         return getDisCountEvents().stream()
-                .mapToInt(discount -> discount.getDiscount(reservationDate, menus))
+                .mapToInt(discount -> discount.getDiscount(date, menus))
                 .sum();
     }
 

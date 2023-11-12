@@ -1,6 +1,5 @@
 package christmas.controller;
 
-import christmas.utils.ErrorMessage;
 import christmas.domain.Menu;
 
 import java.util.ArrayList;
@@ -18,11 +17,11 @@ public class InputParser {
             Arrays.stream(parseToSingleOrder(orders))
                     .forEach(order -> addSingleOrder(order));
         } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_ORDER);
+            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_ORDER);
+            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_ORDER);
+            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
         }
         inputErrorHandler.validateMenus(menus);
         return menus;
@@ -34,7 +33,7 @@ public class InputParser {
             reservationDate = Integer.parseInt(inputDate);
             inputErrorHandler.validateDate(reservationDate);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_RESERVATION_DATE);
+            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_RESERVATION_DATE);
         }
         return reservationDate;
     }
