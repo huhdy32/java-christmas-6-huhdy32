@@ -28,7 +28,7 @@ public enum DiscountEvent {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
             return (int) menus.stream()
-                    .filter(menu -> menu.getCategory() == Menu.Category.디저트)
+                    .filter(menu -> menu.getCategory() == getTargetCategory())
                     .count() * getUnitAmount();
         }
     },
@@ -40,7 +40,7 @@ public enum DiscountEvent {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
             return (int) menus.stream()
-                    .filter(menu -> menu.getCategory() == Menu.Category.메인)
+                    .filter(menu -> menu.getCategory() == getTargetCategory())
                     .count() * getUnitAmount();
         }
     },
@@ -68,6 +68,9 @@ public enum DiscountEvent {
 
     int getUnitAmount() {
         return this.unitAmount;
+    }
+    Menu.Category getTargetCategory() {
+        return this.targetCategory;
     }
 
     public static List<DiscountEvent> getEvents(int reservationDate) {
