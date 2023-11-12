@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.domain;
 
 import java.util.Arrays;
 
@@ -18,9 +18,9 @@ public enum GiftMenu {
         return this.menu.getCost();
     }
 
-    public static GiftMenu getGift(int amount) {
+    public static GiftMenu getGift(int totalPayAmount) {
         return Arrays.stream(GiftMenu.values())
-                .filter(giftMenu -> giftMenu.minimum_Amount_For_Free_Gift <= amount)
+                .filter(giftMenu -> giftMenu.minimum_Amount_For_Free_Gift <= totalPayAmount)
                 .findFirst()
                 .orElse(없음);
     }
