@@ -25,10 +25,16 @@ public class EventService {
     }
 
     public Gift getGift() {
+        if (eventTarget == false) {
+            return Gift.NONE;
+        }
         return Gift.getGift(reservation.getTotalOrderAmount());
     }
 
     public List<DiscountEvent> getDisCountEvents() {
+        if (eventTarget == false) {
+            return List.of(DiscountEvent.NONE);
+        }
         return DiscountEvent.getEvents(reservation.getDate());
     }
 
@@ -50,11 +56,14 @@ public class EventService {
         return reservation.getTotalOrderAmount() - getTotalDiscountAmount();
     }
 
-    public String getBadge() {
-        return Badge.getBadge(getTotalBenefitAmount()).name();
+    public Badge getBadge() {
+        if (eventTarget == false) {
+            return Badge.NONE;
+        }
+        return Badge.getBadge(getTotalBenefitAmount());
     }
 
-    public EventService create(Reservation reservation) {
+    public static EventService create(Reservation reservation) {
         return new EventService(reservation);
     }
 }

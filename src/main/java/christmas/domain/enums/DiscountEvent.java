@@ -50,8 +50,17 @@ public enum DiscountEvent {
     SPECIAL_DISCOUNT("특별 할인",
             Set.of(
                     3, 10, 17, 24, 25, 31),
-            null,
+            Menu.Category.NONE,
             1000) {
+        @Override
+        public int getDiscount(int reservationDate, List<Menu> menus) {
+            return getUnitAmount();
+        }
+    },
+    NONE("없음",
+            null,
+            Menu.Category.NONE,
+            0) {
         @Override
         public int getDiscount(int reservationDate, List<Menu> menus) {
             return getUnitAmount();
@@ -63,11 +72,11 @@ public enum DiscountEvent {
     private int unitAmount;
 
 
-    DiscountEvent(String name, Set<Integer> applyDate, Menu.Category targetCategory, int discountAmount) {
+    DiscountEvent(String name, Set<Integer> applyDate, Menu.Category targetCategory, int unitAmount) {
         this.name = name;
         this.applyDate = applyDate;
         this.targetCategory = targetCategory;
-        this.unitAmount = discountAmount;
+        this.unitAmount = unitAmount;
     }
 
     abstract public int getDiscount(int reservationDate, List<Menu> menus);
