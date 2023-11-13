@@ -4,9 +4,8 @@ import java.util.Arrays;
 
 public enum Gift {
 
-
     CHAMPAGNE(Menu.CHAMPAGNE, 120_000),
-    NONE(null, 0);
+    NONE(Menu.NONE, 0);
     private Menu menu;
     private int minimum_Amount_For_Free_Gift;
 
@@ -15,7 +14,7 @@ public enum Gift {
         this.minimum_Amount_For_Free_Gift = minimum_Amount_For_Free_Gift;
     }
 
-    int getBenefitAmount() {
+    public int getBenefitAmount() {
         return this.menu.getCost();
     }
 
@@ -26,6 +25,9 @@ public enum Gift {
                 .orElse(NONE);
     }
 
+    public Menu getMenu() {
+        return this.menu;
+    }
 
     @Override
     public String toString() {

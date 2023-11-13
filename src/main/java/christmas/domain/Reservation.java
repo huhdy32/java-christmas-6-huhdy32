@@ -27,7 +27,7 @@ public class Reservation {
         if (validateRange(date)) {
             throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_RESERVATION_DATE);
         }
-            return date;
+        return date;
     }
 
     private boolean validateRange(int date) {
@@ -45,6 +45,7 @@ public class Reservation {
         }
         return false;
     }
+
     // 주문이 20개 이상인지
     private boolean validateOrderSize(List<Menu> menus) {
         if (menus.size() > MAX_ORDER_SIZE) {
@@ -53,15 +54,21 @@ public class Reservation {
         return false;
     }
 
-    public static Reservation create(List<Menu> menu, int date) {
-        return new Reservation(menu, date);
-    }
-
-    ///////////////////////////////////////////////////////////
-
     public int getTotalOrderAmount() {
         return menus.stream()
                 .mapToInt(menu -> menu.getCost())
                 .sum();
+    }
+
+    public int getDate() {
+        return this.date;
+    }
+
+    public List<Menu> getMenus() {
+        return this.menus;
+    }
+
+    public static Reservation create(List<Menu> menu, int date) {
+        return new Reservation(menu, date);
     }
 }

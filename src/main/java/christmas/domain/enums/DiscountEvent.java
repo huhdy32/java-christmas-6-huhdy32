@@ -70,7 +70,7 @@ public enum DiscountEvent {
         this.unitAmount = discountAmount;
     }
 
-    abstract int getDiscount(int reservationDate, List<Menu> menus);
+    abstract public int getDiscount(int reservationDate, List<Menu> menus);
 
     int getUnitAmount() {
         return this.unitAmount;

@@ -25,16 +25,16 @@ public class EventService {
     }
 
     public Gift getGift() {
-        return Gift.getGift(getTotalOrderAmount());
+        return Gift.getGift(reservation.getTotalOrderAmount());
     }
 
     public List<DiscountEvent> getDisCountEvents() {
-        return DiscountEvent.getEvents(date);
+        return DiscountEvent.getEvents(reservation.getDate());
     }
 
     public int getTotalDiscountAmount() {
         return getDisCountEvents().stream()
-                .mapToInt(discount -> discount.getDiscount(date, menus))
+                .mapToInt(discount -> discount.getDiscount(reservation.getDate(), reservation.getMenus()))
                 .sum();
     }
 
@@ -43,12 +43,13 @@ public class EventService {
     }
 
     public int getTotalPayAmount() {
-        return getTotalOrderAmount() - getTotalDiscountAmount();
+        return reservation.getTotalOrderAmount() - getTotalDiscountAmount();
     }
 
     public String getBadge() {
         return Badge.getBadge(getTotalBenefitAmount()).name();
     }
+
     public EventService create(Reservation reservation) {
         return new EventService(reservation);
     }
