@@ -43,10 +43,12 @@ public class OutputView extends ConsoleView {
 
     private void printTotalBenefitAmount() {
         out("<총혜택 금액>");
+        out(parseWonFormat(reservation.getTotalBenefitAmount()));
     }
 
     private void printTotalAmount() {
         out("<할인 후 예상 결제 금액>");
+        out(parseWonFormat(reservation.getTotalPayAmount()));
     }
 
     private void printEventBadge() {
@@ -55,5 +57,9 @@ public class OutputView extends ConsoleView {
 
     public void printError(String message) {
         out("[ERROR] " + message);
+    }
+
+    private String parseWonFormat(int amount) {
+        return String.format("%,d", amount);
     }
 }
