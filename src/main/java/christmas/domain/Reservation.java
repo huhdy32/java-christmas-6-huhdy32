@@ -11,26 +11,26 @@ public class Reservation {
     private final List<Menu> menus;
     private final int date;
 
-    public Reservation(List<Menu> menus, int date) {
+    protected Reservation(List<Menu> menus, int date) {
         this.menus = this.validateMenus(menus);
         this.date = this.validateDate(date);
     }
 
-    private List<Menu> validateMenus(List<Menu> menus) {
+    public static List<Menu> validateMenus(List<Menu> menus) {
         if (validateOrder(menus) || validateOrderSize(menus)) {
             throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
         }
         return menus;
     }
 
-    private int validateDate(int date) {
+    public static int validateDate(int date) {
         if (validateRange(date)) {
             throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_RESERVATION_DATE);
         }
         return date;
     }
 
-    private boolean validateRange(int date) {
+    private static boolean validateRange(int date) {
         if (date > 31 || date < 0) {
             return true;
         }
@@ -38,7 +38,7 @@ public class Reservation {
     }
 
     // 음료만 주문했는지 확인
-    private boolean validateOrder(List<Menu> menus) {
+    private static boolean validateOrder(List<Menu> menus) {
         if (menus.stream()
                 .allMatch(menu -> menu.getCategory() == BANNED_SINGLE_CATEGORY)) {
             return true;
@@ -47,7 +47,7 @@ public class Reservation {
     }
 
     // 주문이 20개 이상인지
-    private boolean validateOrderSize(List<Menu> menus) {
+    private static boolean validateOrderSize(List<Menu> menus) {
         if (menus.size() > MAX_ORDER_SIZE) {
             return true;
         }

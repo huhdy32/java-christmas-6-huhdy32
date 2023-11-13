@@ -1,39 +1,45 @@
 package christmas.controller;
 
 import christmas.domain.enums.Menu;
+import christmas.ui.InputView;
+import christmas.ui.OutputView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.PatternSyntaxException;
 
 public class InputParser {
 
-    InputErrorHandler inputErrorHandler = new InputErrorHandler();
-    List<Menu> menus = new ArrayList<>();
+    private final InputErrorHandler inputErrorHandler = new InputErrorHandler();
+    private List<Menu> menus;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public List<Menu> convertInputToOrder(String orders) {
+    public InputParser(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
+    public List<Menu> parseReservationOrder() {
+        menus = new ArrayList<>();;
         try {
+            String orders = inputView.getOrder();
             Arrays.stream(parseToSingleOrder(orders))
                     .forEach(order -> addSingleOrder(order));
-        } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
+            outputView.printError(e.getMessage());
+            return parseReservationOrder();
         }
-        inputErrorHandler.validateMenus(menus);
         return menus;
     }
 
-    public int convertInputToReservationDate(String inputDate) {
+    public int getReservationDate() {
+        String inputDate = inputView.getDate();
         int reservationDate;
         try {
             reservationDate = Integer.parseInt(inputDate);
-            inputErrorHandler.validateDate(reservationDate);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_RESERVATION_DATE);
+            return getReservationDate();
         }
         return reservationDate;
     }
