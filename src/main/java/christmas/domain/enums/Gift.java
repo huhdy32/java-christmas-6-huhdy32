@@ -2,7 +2,7 @@ package christmas.domain.enums;
 
 import java.util.Arrays;
 
-public enum GiftMenu {
+public enum Gift {
 
 
     CHAMPAGNE(Menu.CHAMPAGNE, 120_000),
@@ -10,7 +10,7 @@ public enum GiftMenu {
     private Menu menu;
     private int minimum_Amount_For_Free_Gift;
 
-    GiftMenu(Menu menu, int minimum_Amount_For_Free_Gift) {
+    Gift(Menu menu, int minimum_Amount_For_Free_Gift) {
         this.menu = menu;
         this.minimum_Amount_For_Free_Gift = minimum_Amount_For_Free_Gift;
     }
@@ -19,8 +19,8 @@ public enum GiftMenu {
         return this.menu.getCost();
     }
 
-    public static GiftMenu getGift(int totalPayAmount) {
-        return Arrays.stream(GiftMenu.values())
+    public static Gift getGift(int totalPayAmount) {
+        return Arrays.stream(Gift.values())
                 .filter(giftMenu -> giftMenu.minimum_Amount_For_Free_Gift <= totalPayAmount)
                 .findFirst()
                 .orElse(NONE);

@@ -1,7 +1,7 @@
 package christmas.domain;
 
 
-import christmas.domain.enums.GiftMenu;
+import christmas.domain.enums.Gift;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,16 +13,16 @@ public class GiftMenuTest {
     @DisplayName("증정품 제공 테스트")
     @ValueSource(ints = {120_000, 130_000})
     void provide_Payment(int totalPayAmount) {
-        assertThat(GiftMenu.getGift(totalPayAmount))
-                .isEqualTo(GiftMenu.CHAMPAGNE);
+        assertThat(Gift.getGift(totalPayAmount))
+                .isEqualTo(Gift.CHAMPAGNE);
     }
 
     @ParameterizedTest
     @DisplayName("없음 처리 테스트")
     @ValueSource(ints = {1, -12, 0})
     void provide_Invalid_Payment(int totalPayAmount) {
-        assertThat(GiftMenu.getGift(totalPayAmount))
-                .isEqualTo(GiftMenu.NONE);
+        assertThat(Gift.getGift(totalPayAmount))
+                .isEqualTo(Gift.NONE);
     }
 
 }

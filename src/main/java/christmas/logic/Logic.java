@@ -9,9 +9,6 @@ import christmas.ui.OutputView;
 import java.util.List;
 
 public class Logic {
-
-    public static final int MINIMUM_ORDER_AMOUNT_FOR_BENEFIT = 10_000;
-
     private final InputView inputView;
     private final OutputView outputView;
     private InputParser inputParser = new InputParser();
