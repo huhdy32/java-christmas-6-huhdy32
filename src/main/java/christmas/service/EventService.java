@@ -42,6 +42,10 @@ public class EventService {
         return getGift().getBenefitAmount() + getTotalDiscountAmount();
     }
 
+    public String getGiftName() {
+        return getGift().getName();
+    }
+
     public int getTotalPayAmount() {
         return reservation.getTotalOrderAmount() - getTotalDiscountAmount();
     }

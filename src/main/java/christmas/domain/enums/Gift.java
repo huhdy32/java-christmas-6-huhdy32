@@ -4,12 +4,14 @@ import java.util.Arrays;
 
 public enum Gift {
 
-    CHAMPAGNE(Menu.CHAMPAGNE, 120_000),
-    NONE(Menu.NONE, 0);
+    CHAMPAGNE("샴페인 1개", Menu.CHAMPAGNE, 120_000),
+    NONE("없음", Menu.NONE, 0);
+    private String name;
     private Menu menu;
     private int minimum_Amount_For_Free_Gift;
 
-    Gift(Menu menu, int minimum_Amount_For_Free_Gift) {
+    Gift(String name, Menu menu, int minimum_Amount_For_Free_Gift) {
+        this.name = name;
         this.menu = menu;
         this.minimum_Amount_For_Free_Gift = minimum_Amount_For_Free_Gift;
     }
@@ -25,8 +27,8 @@ public enum Gift {
                 .orElse(NONE);
     }
 
-    public Menu getMenu() {
-        return this.menu;
+    public String getName() {
+        return this.name;
     }
 
     @Override
