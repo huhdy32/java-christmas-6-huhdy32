@@ -1,7 +1,7 @@
 package christmas.logic;
 
 import christmas.controller.InputParser;
-import christmas.domain.Menu;
+import christmas.domain.enums.Menu;
 import christmas.domain.Reservation;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;

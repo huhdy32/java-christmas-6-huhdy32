@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.Menu;
+import christmas.domain.enums.Menu;
 
 import java.util.ArrayList;
 import java.util.Arrays;

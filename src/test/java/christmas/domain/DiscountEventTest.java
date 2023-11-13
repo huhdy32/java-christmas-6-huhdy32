@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.domain.enums.DiscountEvent;
+import christmas.domain.enums.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

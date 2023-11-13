@@ -1,7 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.Menu;
-import christmas.logic.Logic;
+import christmas.domain.enums.Menu;
 
 import java.util.List;
 

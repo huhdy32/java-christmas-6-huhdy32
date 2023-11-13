@@ -1,7 +1,7 @@
 package christmas.domain;
 
 import christmas.controller.InputErrorHandler;
-import christmas.logic.Logic;
+import christmas.domain.enums.Menu;
 
 import java.util.List;
 
