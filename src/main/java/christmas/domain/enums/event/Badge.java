@@ -1,4 +1,4 @@
-package christmas.domain.enums;
+package christmas.domain.enums.event;
 
 import java.util.Arrays;
 

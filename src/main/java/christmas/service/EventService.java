@@ -1,9 +1,9 @@
 package christmas.service;
 
 import christmas.domain.Reservation;
-import christmas.domain.enums.Badge;
-import christmas.domain.enums.DiscountEvent;
-import christmas.domain.enums.Gift;
+import christmas.domain.enums.event.Badge;
+import christmas.domain.enums.event.DiscountEvent;
+import christmas.domain.enums.event.Gift;
 
 import java.util.List;
 

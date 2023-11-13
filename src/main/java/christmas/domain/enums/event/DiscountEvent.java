@@ -1,4 +1,6 @@
-package christmas.domain.enums;
+package christmas.domain.enums.event;
+
+import christmas.domain.enums.Menu;
 
 import java.util.Arrays;
 import java.util.List;
