@@ -63,22 +63,22 @@ public class DiscountEventTest {
         return Stream.of(
                 Arguments.of(
                         26,
-                        List.of(Menu.아이스크림,
-                                Menu.초코케이크,
-                                Menu.제로콜라),
+                        List.of(Menu.ICE_CREAM,
+                                Menu.CHOCOLATE_CAKE,
+                                Menu.ZERO_COKE),
                         4046
                 ),
                 Arguments.of(
                         3,
-                        List.of(Menu.아이스크림,
-                                Menu.초코케이크,
-                                Menu.바비큐립),
+                        List.of(Menu.ICE_CREAM,
+                                Menu.CHOCOLATE_CAKE,
+                                Menu.BARBECUE_RIBS),
                         6346
                 ),
                 Arguments.of(
                         22,
-                        List.of(Menu.티본스테이크,
-                                Menu.양송이스프),
+                        List.of(Menu.T_BONE_STEAK,
+                                Menu.WHITE_MUSHROOM_SOUP),
                         5223
                 )
         );

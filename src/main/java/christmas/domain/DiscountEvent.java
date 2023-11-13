@@ -25,7 +25,7 @@ public enum DiscountEvent {
                     11, 12, 13, 14, 18,
                     19, 20, 21, 25, 26,
                     27, 28, 31),
-            Menu.Category.디저트,
+            Menu.Category.DESSERT,
             2023) {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {
@@ -38,7 +38,7 @@ public enum DiscountEvent {
             Set.of(
                     1, 2, 8, 9, 15
                     , 16, 22, 23, 29, 30),
-            Menu.Category.메인,
+            Menu.Category.MAIN,
             2023) {
         @Override
         int getDiscount(int reservationDate, List<Menu> menus) {

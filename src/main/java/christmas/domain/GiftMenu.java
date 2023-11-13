@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 public enum GiftMenu {
 
-    샴페인(Menu.샴페인, 120_000),
-    없음(null, 0);
+
+    CHAMPAGNE(Menu.CHAMPAGNE, 120_000),
+    NONE(null, 0);
     private Menu menu;
     private int minimum_Amount_For_Free_Gift;
 
@@ -22,6 +23,12 @@ public enum GiftMenu {
         return Arrays.stream(GiftMenu.values())
                 .filter(giftMenu -> giftMenu.minimum_Amount_For_Free_Gift <= totalPayAmount)
                 .findFirst()
-                .orElse(없음);
+                .orElse(NONE);
+    }
+
+
+    @Override
+    public String toString() {
+        return menu.toString();
     }
 }

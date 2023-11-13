@@ -2,7 +2,6 @@ package christmas.domain;
 
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,7 +13,7 @@ public class GiftMenuTest {
     @ValueSource(ints = {120_000, 130_000})
     void provide_Payment(int totalPayAmount) {
         assertThat(GiftMenu.getGift(totalPayAmount))
-                .isEqualTo(GiftMenu.샴페인);
+                .isEqualTo(GiftMenu.CHAMPAGNE);
     }
 
     @ParameterizedTest
@@ -22,7 +21,7 @@ public class GiftMenuTest {
     @ValueSource(ints = {1, -12, 0})
     void provide_Invalid_Payment(int totalPayAmount) {
         assertThat(GiftMenu.getGift(totalPayAmount))
-                .isEqualTo(GiftMenu.없음);
+                .isEqualTo(GiftMenu.NONE);
     }
 
 }

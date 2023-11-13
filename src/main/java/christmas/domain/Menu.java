@@ -2,26 +2,29 @@ package christmas.domain;
 
 public enum Menu {
 
-    양송이스프(6_000, Category.에피타이저),
-    타파스(5_500, Category.에피타이저),
-    시저샐러드(8_000, Category.에피타이저),
+    WHITE_MUSHROOM_SOUP("양송이스프",6_000, Category.APPETIZER),
+    TAPAS("타파스",5_500, Category.APPETIZER),
 
-    티본스테이크(55_000, Category.메인),
-    바비큐립(54_000, Category.메인),
-    해산물파스타(35_000, Category.메인),
-    크리스마스파스타(25_000, Category.메인),
+    CAESAR_SALAD("시저샐러드",8_000, Category.APPETIZER),
 
-    초코케이크(15_000, Category.디저트),
-    아이스크림(5_000, Category.디저트),
 
-    제로콜라(3_000, Category.음료),
-    레드와인(60_000, Category.음료),
-    샴페인(25_000, Category.음료);
+    T_BONE_STEAK("티본스테이크",55_000, Category.MAIN),
+    BARBECUE_RIBS("바비큐립",54_000, Category.MAIN),
+    SEAFOOD_PASTA("해산물파스타",35_000, Category.MAIN),
+    CHRISTMAS_PASTA("크리스마스파스타",25_000, Category.MAIN),
 
+    CHOCOLATE_CAKE("초코케이크",15_000, Category.DESSERT),
+    ICE_CREAM("아이스크림",5_000, Category.DESSERT),
+
+    ZERO_COKE("제로콜라",3_000, Category.DRINK),
+    RED_WINE("레드와인",60_000, Category.DRINK),
+    CHAMPAGNE("샴페인", 25_000, Category.DRINK);
+
+    private String name;
     private int cost;
     private Category category;
 
-    Menu(int cost, Category category) {
+    Menu(String name, int cost, Category category) {
         this.cost = cost;
         this.category = category;
     }
@@ -35,9 +38,9 @@ public enum Menu {
     }
 
     public enum Category {
-        에피타이저,
-        메인,
-        디저트,
-        음료
+        APPETIZER,
+        MAIN,
+        DESSERT,
+        DRINK
     }
 }
