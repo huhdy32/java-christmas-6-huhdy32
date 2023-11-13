@@ -9,9 +9,8 @@ import christmas.ui.OutputView;
 import java.util.List;
 
 public class Logic {
-    public static final int MAX_ORDER_SIZE = 20;
+
     public static final int MINIMUM_ORDER_AMOUNT_FOR_BENEFIT = 10_000;
-    public static final Menu.Category BANNED_SINGLE_CATEGORY = Menu.Category.음료;
 
     private final InputView inputView;
     private final OutputView outputView;
