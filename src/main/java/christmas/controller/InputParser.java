@@ -28,7 +28,13 @@ public class InputParser {
     }
 
     public int convertInputToReservationDate(String inputDate) {
-        int reservationDate = inputErrorHandler.validateDate(inputDate);
+        int reservationDate;
+        try {
+            reservationDate = Integer.parseInt(inputDate);
+            inputErrorHandler.validateDate(reservationDate);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_RESERVATION_DATE);
+        }
         return reservationDate;
     }
 
@@ -38,7 +44,7 @@ public class InputParser {
 
     private void addSingleOrder(String singleOrder) {
         String[] order = singleOrder.split("-");
-        int orderCount = inputErrorHandler.validateCount(order[1]);
+        int orderCount = Integer.parseInt(order[1]);
         inputErrorHandler.validateOrderCount(orderCount);
         addMenu(order[0], orderCount);
     }
