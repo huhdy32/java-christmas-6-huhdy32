@@ -13,7 +13,7 @@ public class BadgeTest {
     @ValueSource(ints = {30_000, 40_000, 50_000, 20_000})
     void provide_Santa_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.산타);
+                .isEqualTo(Badge.SANTA);
     }
 
     @DisplayName("트리 반환 테스트")
@@ -21,7 +21,7 @@ public class BadgeTest {
     @ValueSource(ints = {10_000, 19_999})
     void provide_Tree_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.트리);
+                .isEqualTo(Badge.TREE);
     }
 
     @DisplayName("별 반환 테스트")
@@ -29,7 +29,7 @@ public class BadgeTest {
     @ValueSource(ints = {5_000, 9_999})
     void provide_Star_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.별);
+                .isEqualTo(Badge.STAR);
     }
 
     @DisplayName("없음 반환 테스트")
@@ -37,6 +37,6 @@ public class BadgeTest {
     @ValueSource(ints = {0, 4999, -500})
     void provide_None_Amount(int benefitAmount) {
         assertThat(Badge.getBadge(benefitAmount))
-                .isEqualTo(Badge.없음);
+                .isEqualTo(Badge.NONE);
     }
 }

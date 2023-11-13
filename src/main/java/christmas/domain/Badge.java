@@ -3,14 +3,16 @@ package christmas.domain;
 import java.util.Arrays;
 
 public enum Badge {
-    산타( 20_000),
-    트리( 10_000),
-    별(5_000),
-    없음( 0);
+    SANTA("산타", 20_000),
+    TREE("트리", 10_000),
+    STAR("별", 5_000),
+    NONE("없음", 0);
 
+    private String name;
     private int minimumAmount;
 
-    Badge(int minimumAmount) {
+    Badge(String name, int minimumAmount) {
+        this.name = name;
         this.minimumAmount = minimumAmount;
     }
 
@@ -18,6 +20,10 @@ public enum Badge {
         return Arrays.stream(Badge.values())
                 .filter(badge -> badge.minimumAmount <= benefitAmount)
                 .findFirst()
-                .orElse(없음);
+                .orElse(NONE);
+    }
+
+    String getName() {
+        return this.name;
     }
 }

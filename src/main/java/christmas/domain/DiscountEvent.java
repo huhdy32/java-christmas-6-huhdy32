@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 public enum DiscountEvent {
-    CHRISTMAS_DISCOUNT(Set.of(
-            1, 2, 3, 4, 5,
-            6, 7, 8, 9, 10,
-            11, 12, 13, 14, 15,
-            16, 17, 18, 19, 20,
-            21, 22, 23, 24, 25),
+    CHRISTMAS_DISCOUNT("크리스마스 디데이 할인",
+            Set.of(
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10,
+                    11, 12, 13, 14, 15,
+                    16, 17, 18, 19, 20,
+                    21, 22, 23, 24, 25),
             null,
             100) {
         @Override
@@ -18,11 +19,12 @@ public enum DiscountEvent {
             return 1000 + getUnitAmount() * reservationDate;
         }
     },
-    WEEKDAY_DISCOUNT(Set.of(
-            3, 4, 5, 6, 7,
-            11, 12, 13, 14, 18,
-            19, 20, 21, 25, 26,
-            27, 28, 31),
+    WEEKDAY_DISCOUNT("평일 할인",
+            Set.of(
+                    3, 4, 5, 6, 7,
+                    11, 12, 13, 14, 18,
+                    19, 20, 21, 25, 26,
+                    27, 28, 31),
             Menu.Category.디저트,
             2023) {
         @Override
@@ -32,9 +34,10 @@ public enum DiscountEvent {
                     .count() * getUnitAmount();
         }
     },
-    WEEKEND_DISCOUNT(Set.of(
-            1, 2, 8, 9, 15
-            , 16, 22, 23, 29, 30),
+    WEEKEND_DISCOUNT("주말 할인",
+            Set.of(
+                    1, 2, 8, 9, 15
+                    , 16, 22, 23, 29, 30),
             Menu.Category.메인,
             2023) {
         @Override
@@ -44,8 +47,9 @@ public enum DiscountEvent {
                     .count() * getUnitAmount();
         }
     },
-    SPECIAL_DISCOUNT(Set.of(
-            3, 10, 17, 24, 25, 31),
+    SPECIAL_DISCOUNT("특별 할인",
+            Set.of(
+                    3, 10, 17, 24, 25, 31),
             null,
             1000) {
         @Override
@@ -53,12 +57,14 @@ public enum DiscountEvent {
             return getUnitAmount();
         }
     };
+    private String name;
     private Set<Integer> applyDate;
     private Menu.Category targetCategory;
     private int unitAmount;
 
 
-    DiscountEvent(Set<Integer> applyDate, Menu.Category targetCategory, int discountAmount) {
+    DiscountEvent(String name, Set<Integer> applyDate, Menu.Category targetCategory, int discountAmount) {
+        this.name = name;
         this.applyDate = applyDate;
         this.targetCategory = targetCategory;
         this.unitAmount = discountAmount;
@@ -69,6 +75,7 @@ public enum DiscountEvent {
     int getUnitAmount() {
         return this.unitAmount;
     }
+
     Menu.Category getTargetCategory() {
         return this.targetCategory;
     }
