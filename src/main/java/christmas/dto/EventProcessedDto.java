@@ -7,7 +7,7 @@ import christmas.domain.enums.event.Gift;
 
 import java.util.List;
 
-public class ReservationProcessedResponseDto {
+public class EventProcessedDto {
     private final List<Menu> orders;
     private final int totalOrderAmount;
     private final Gift gifts;
@@ -16,7 +16,7 @@ public class ReservationProcessedResponseDto {
     private final int getExpectedPaymentAmount;
     private final Badge badge;
 
-    public ReservationProcessedResponseDto(
+    public EventProcessedDto(
             List<Menu> orders,
             int totalOrderAmount,
             Gift gifts,
@@ -61,7 +61,7 @@ public class ReservationProcessedResponseDto {
         return badge;
     }
 
-    public static ReservationProcessedResponseDto create(
+    public static EventProcessedDto create(
             List<Menu> orders,
             int totalOrderAmount,
             Gift gifts,
@@ -69,7 +69,7 @@ public class ReservationProcessedResponseDto {
             int totalBenefitAmount,
             int getExpectedPaymentAmount,
             Badge badge){
-        return new ReservationProcessedResponseDto(
+        return new EventProcessedDto(
                 orders,
                 totalOrderAmount,
                 gifts, discountEvents,
