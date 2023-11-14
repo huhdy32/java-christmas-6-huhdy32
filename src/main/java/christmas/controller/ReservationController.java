@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Reservation;
 import christmas.domain.enums.Menu;
+import christmas.dto.EventProcessedDto;
 import christmas.service.EventService;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;
@@ -29,9 +30,12 @@ public class ReservationController {
         try {
             // 예약 생성
             Reservation reservation = Reservation.create(menus, date);
-            // 이벤트 적용 목록 출력하기
+            // 이벤트 적용
             eventService = EventService.create(reservation);
-            outputView.printDetails(eventService);
+            // 적용 결과
+            EventProcessedDto eventProcessedDto = eventService.createProcessdReservationDto();
+            // 결과 출력
+            outputView.printDetails(eventProcessedDto);
         } catch (IllegalStateException e) {
             outputView.printError(e.getMessage());
             getReservation();
