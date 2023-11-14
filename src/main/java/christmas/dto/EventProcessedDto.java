@@ -1,5 +1,6 @@
 package christmas.dto;
 
+import christmas.domain.Reservation;
 import christmas.domain.enums.Menu;
 import christmas.domain.enums.event.Badge;
 import christmas.domain.enums.event.DiscountEvent;
@@ -8,7 +9,8 @@ import christmas.domain.enums.event.Gift;
 import java.util.List;
 
 public class EventProcessedDto {
-    private final List<Menu> orders;
+
+    private final Reservation reservation;
     private final int totalOrderAmount;
     private final Gift gifts;
     private final List<DiscountEvent> discountEvents;
@@ -17,14 +19,14 @@ public class EventProcessedDto {
     private final Badge badge;
 
     public EventProcessedDto(
-            List<Menu> orders,
+            Reservation reservation,
             int totalOrderAmount,
             Gift gifts,
             List<DiscountEvent> discountEvents,
             int totalBenefitAmount,
             int getExpectedPaymentAmount,
             Badge badge) {
-        this.orders = orders;
+        this.reservation = reservation;
         this.totalOrderAmount = totalOrderAmount;
         this.gifts = gifts;
         this.discountEvents = discountEvents;
