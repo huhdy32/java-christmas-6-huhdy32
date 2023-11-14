@@ -11,16 +11,16 @@ import java.util.List;
 public class EventService {
     public static final int MINIMUM_ORDER_AMOUNT_FOR_EVENT = 10_000;
     private final Reservation reservation;
-    private boolean eventTarget;
+    private final boolean eventTarget;
 
     protected EventService(Reservation reservation) {
-        validate(reservation);
+        eventTarget = validate(reservation);
         this.reservation = reservation;
     }
 
-    public EventProcessedDto createDto() {
-        return EventProcessedDto.create(
-                reservation.getMenus(),
+    public EventProcessedDto createProcessdReservationDto() {
+        return new EventProcessedDto(
+                reservation,
                 getTotalOrderAmountBeforeDiscount(),
                 getGift(),
                 getDisCountEvents(),
@@ -30,11 +30,11 @@ public class EventService {
         );
     }
 
-    private void validate(Reservation reservation) {
+    private boolean validate(Reservation reservation) {
         if (reservation.getTotalOrderAmount() >= MINIMUM_ORDER_AMOUNT_FOR_EVENT) {
-            eventTarget = true;
+            return true;
         }
-        eventTarget = false;
+        return false;
     }
 
     public int getTotalOrderAmountBeforeDiscount() {
@@ -50,7 +50,7 @@ public class EventService {
 
     public List<DiscountEvent> getDisCountEvents() {
         if (eventTarget == false) {
-            return List.of(DiscountEvent.NONE);
+            return List.of();
         }
         return DiscountEvent.getEvents(reservation.getDate());
     }
