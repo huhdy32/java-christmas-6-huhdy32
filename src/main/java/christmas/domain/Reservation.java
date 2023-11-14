@@ -1,9 +1,11 @@
 package christmas.domain;
 
-import christmas.controller.InputErrorHandler;
 import christmas.domain.enums.Menu;
 
 import java.util.List;
+
+import static christmas.controller.ReservationRequestParser.ILLEGAL_ORDER;
+import static christmas.controller.ReservationRequestParser.ILLEGAL_RESERVATION_DATE;
 
 public class Reservation {
     public static final int MAX_ORDER_SIZE = 20;
@@ -18,14 +20,14 @@ public class Reservation {
 
     public static List<Menu> validateMenus(List<Menu> menus) {
         if (validateOrder(menus) || validateOrderSize(menus)) {
-            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_ORDER);
+            throw new IllegalArgumentException(ILLEGAL_ORDER);
         }
         return menus;
     }
 
     public static int validateDate(int date) {
         if (validateRange(date)) {
-            throw new IllegalArgumentException(InputErrorHandler.ILLEGAL_RESERVATION_DATE);
+            throw new IllegalArgumentException(ILLEGAL_RESERVATION_DATE);
         }
         return date;
     }
