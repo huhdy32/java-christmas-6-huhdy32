@@ -97,4 +97,8 @@ public enum DiscountEvent {
                 .filter(discount -> discount.applyDate.contains(reservationDate))
                 .toList();
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
