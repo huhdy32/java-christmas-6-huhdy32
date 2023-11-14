@@ -3,6 +3,7 @@ package christmas.domain.enums.event;
 import christmas.domain.enums.Menu;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -60,7 +61,7 @@ public enum DiscountEvent {
         }
     },
     NONE("없음",
-            null,
+            new HashSet<>(),
             Menu.Category.NONE,
             0) {
         @Override
