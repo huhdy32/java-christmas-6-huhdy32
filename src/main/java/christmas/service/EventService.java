@@ -4,6 +4,7 @@ import christmas.domain.Reservation;
 import christmas.domain.enums.event.Badge;
 import christmas.domain.enums.event.DiscountEvent;
 import christmas.domain.enums.event.Gift;
+import christmas.dto.EventProcessedDto;
 
 import java.util.List;
 
@@ -17,11 +18,27 @@ public class EventService {
         this.reservation = reservation;
     }
 
+    public EventProcessedDto createDto() {
+        return EventProcessedDto.create(
+                reservation.getMenus(),
+                getTotalOrderAmountBeforeDiscount(),
+                getGift(),
+                getDisCountEvents(),
+                getTotalBenefitAmount(),
+                getExpectedPaymentAmount(),
+                getBadge()
+        );
+    }
+
     private void validate(Reservation reservation) {
         if (reservation.getTotalOrderAmount() >= MINIMUM_ORDER_AMOUNT_FOR_EVENT) {
             eventTarget = true;
         }
         eventTarget = false;
+    }
+
+    public int getTotalOrderAmountBeforeDiscount() {
+        return this.reservation.getTotalOrderAmount();
     }
 
     public Gift getGift() {
@@ -48,11 +65,7 @@ public class EventService {
         return getGift().getBenefitAmount() + getTotalDiscountAmount();
     }
 
-    public String getGiftName() {
-        return getGift().getName();
-    }
-
-    public int getTotalPayAmount() {
+    public int getExpectedPaymentAmount() {
         return reservation.getTotalOrderAmount() - getTotalDiscountAmount();
     }
 
