@@ -23,8 +23,7 @@ public enum Badge {
                 .orElse(NONE);
     }
 
-    @Override
-    public String toString() {
+    public String getName() {
         return this.name;
     }
 }
