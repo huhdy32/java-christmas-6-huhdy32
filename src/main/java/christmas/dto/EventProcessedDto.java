@@ -7,7 +7,7 @@ import christmas.domain.enums.event.Gift;
 
 import java.util.List;
 
-public record EventProcessedReservationDto(
+public record EventProcessedDto(
         Reservation reservation,
         int totalOrderAmount,
         Gift gifts,
