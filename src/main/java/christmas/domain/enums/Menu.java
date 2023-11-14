@@ -1,5 +1,7 @@
 package christmas.domain.enums;
 
+import java.util.Arrays;
+
 public enum Menu {
 
     WHITE_MUSHROOM_SOUP("양송이스프", 6_000, Category.APPETIZER),
@@ -22,13 +24,24 @@ public enum Menu {
 
     NONE("없음", 0, Category.NONE);
 
-    private String name;
+    private String menuName;
     private int cost;
     private Category category;
 
-    Menu(String name, int cost, Category category) {
+    Menu(String menuName, int cost, Category category) {
+        this.menuName = menuName;
         this.cost = cost;
         this.category = category;
+    }
+    public static Menu getMenu(String menuName) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getMenuName().equals(menuName))
+                .findFirst()
+                .orElse(NONE);
+    }
+
+    public String getMenuName() {
+        return this.menuName;
     }
 
     public int getCost() {
