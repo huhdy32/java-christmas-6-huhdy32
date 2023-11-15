@@ -16,7 +16,10 @@ public class ReservationController {
 
     private EventService eventService;
 
-    public ReservationController(ReservationRequestParser reservationRequestParser, InputView inputView, OutputView outputView) {
+    public ReservationController(
+            ReservationRequestParser reservationRequestParser,
+            InputView inputView,
+            OutputView outputView) {
         this.reservationRequestParser = reservationRequestParser;
         this.inputView = inputView;
         this.outputView = outputView;
