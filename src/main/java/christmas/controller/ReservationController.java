@@ -51,7 +51,7 @@ public class ReservationController {
     private List<Menu> getReservationMenus() {
         try {
             String reservationOrder = inputView.getOrder();
-            return orderInputParser.parseOrders(reservationOrder);
+            return orderInputParser.parseOrder(reservationOrder);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return getReservationMenus();

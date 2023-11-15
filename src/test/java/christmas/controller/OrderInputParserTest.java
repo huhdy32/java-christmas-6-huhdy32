@@ -1,7 +1,6 @@
 package christmas.controller;
 
 import christmas.domain.enums.Menu;
-import christmas.ui.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +24,7 @@ public class OrderInputParserTest {
     @ParameterizedTest
     @ValueSource(strings = {"해산물파스타-1,초코케이크-2","초코케이크-2,해산물파스타-1"})
     void parsing_Valid_Order_Test(String order) {
-        assertThat(orderInputParser.parseOrders(order))
+        assertThat(orderInputParser.parseOrder(order))
                 .containsAll(List.of(Menu.CHOCOLATE_CAKE, Menu.CHOCOLATE_CAKE, Menu.SEAFOOD_PASTA));
     }
 
@@ -34,7 +33,7 @@ public class OrderInputParserTest {
     @ValueSource(strings = {"해산물파스타-0ㅈㄹ", "홰솽물퐈스톼-2", "샵빠뚜비두바,홰솽물퐈스톼-2", "해산물파스타-2 ,초코케이크-1"})
     void parseing_Invalid_Order_Test(String order) {
         assertThrows(IllegalArgumentException.class, () -> {
-            orderInputParser.parseOrders(order);
+            orderInputParser.parseOrder(order);
         });
     }
 }

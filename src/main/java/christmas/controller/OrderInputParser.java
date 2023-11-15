@@ -12,17 +12,17 @@ public class OrderInputParser {
     public static final String ILLEGAL_ORDER = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private Set<Menu> orderedMenu = new HashSet<>();
 
-    public List<Menu> parseOrders(String orders) {
+    public List<Menu> parseOrder(String orderInput) {
         List<Menu> menus = new ArrayList<>();
-        String[] seperatedOrders = orders.split(",");
+        String[] seperatedOrders = orderInput.split(",");
         for (int i = 0; i < seperatedOrders.length; i++) {
-            Order order = parseOrder(seperatedOrders[i]);
+            Order order = parseToOrder(seperatedOrders[i]);
             menus.addAll(order.getMenus());
         }
         return Reservation.validateMenus(menus);
     }
 
-    private Order parseOrder(String singleOrder) {
+    private Order parseToOrder(String singleOrder) {
         String[] order = singleOrder.split("-");
         if (order.length != 2) {
             throw new IllegalArgumentException(ILLEGAL_ORDER + "주문은 '-'로 구분되야 합니다.");
