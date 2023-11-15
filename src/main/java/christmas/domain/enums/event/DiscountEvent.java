@@ -19,7 +19,7 @@ public enum DiscountEvent {
             100) {
         @Override
         public int getDiscount(int reservationDate, List<Menu> menus) {
-            return 1000 + getUnitAmount() * reservationDate;
+            return 1000 + getUnitAmount() * (reservationDate-1);
         }
     },
     WEEKDAY_DISCOUNT("평일 할인",

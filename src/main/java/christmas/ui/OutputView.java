@@ -2,6 +2,7 @@ package christmas.ui;
 
 import christmas.domain.Reservation;
 import christmas.domain.enums.Menu;
+import christmas.domain.enums.event.Gift;
 import christmas.dto.EventProcessedDto;
 import christmas.ui.view.ConsoleView;
 
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 public class OutputView extends ConsoleView {
 
     private EventProcessedDto eventProcessedDto;
+
     public void printDetails(EventProcessedDto eventProcessedDto) {
         this.eventProcessedDto = eventProcessedDto;
         printReservationInfo();
@@ -29,7 +31,7 @@ public class OutputView extends ConsoleView {
         out("12월 " + reservation.getDate() + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         out("");
         Map<Menu, Long> itemCounts = reservation.getMenus().stream()
-                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         out("<주문 메뉴>");
         itemCounts.forEach((menu, count) -> out(menu.getMenuName() + " " + itemCounts.get(menu) + "개"));
     }
@@ -48,11 +50,15 @@ public class OutputView extends ConsoleView {
         Reservation reservation = eventProcessedDto.reservation();
         int date = reservation.getDate();
         List<Menu> menus = reservation.getMenus();
-
         out("<혜택 내역>");
         eventProcessedDto.discountEvents().stream()
                 .forEach(discountEvent ->
-                        out(discountEvent.name() + " : " + parseWonFormat(discountEvent.getDiscount(date, menus))));
+                        out(discountEvent.getName() + " : " + parseWonFormat(discountEvent.getDiscount(date, menus))));
+        if (eventProcessedDto.gifts() == Gift.NONE) {
+            out("없음");
+            return;
+        }
+        out("증정 이벤트 : " + parseWonFormat(eventProcessedDto.gifts().getBenefitAmount()));
     }
 
     private void printTotalBenefitAmount() {
