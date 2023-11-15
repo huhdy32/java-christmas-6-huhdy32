@@ -33,7 +33,7 @@ public class Reservation {
     }
 
     private static boolean validateRange(int date) {
-        if (date > 31 || date < 0) {
+        if (date > 31 || date < 1) {
             return true;
         }
         return false;
