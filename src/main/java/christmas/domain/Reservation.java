@@ -4,8 +4,8 @@ import christmas.domain.enums.Menu;
 
 import java.util.List;
 
-import static christmas.controller.ReservationRequestParser.ILLEGAL_ORDER;
-import static christmas.controller.ReservationRequestParser.ILLEGAL_RESERVATION_DATE;
+import static christmas.controller.DateInputParser.ILLEGAL_RESERVATION_DATE;
+import static christmas.controller.OrderInputParser.ILLEGAL_ORDER;
 
 public class Reservation {
     public static final int MAX_ORDER_SIZE = 20;

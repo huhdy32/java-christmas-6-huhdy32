@@ -10,17 +10,19 @@ import christmas.ui.OutputView;
 import java.util.List;
 
 public class ReservationController {
-    private final ReservationRequestParser reservationRequestParser;
+    private final DateInputParser dateInputParser;
+    private final OrderInputParser orderInputParser;
     private final InputView inputView;
     private final OutputView outputView;
 
     private EventService eventService;
 
-    public ReservationController(
-            ReservationRequestParser reservationRequestParser,
-            InputView inputView,
-            OutputView outputView) {
-        this.reservationRequestParser = reservationRequestParser;
+    public ReservationController(DateInputParser dateInputParser,
+                                 OrderInputParser orderInputParser,
+                                 InputView inputView,
+                                 OutputView outputView) {
+        this.dateInputParser = dateInputParser;
+        this.orderInputParser = orderInputParser;
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -49,7 +51,7 @@ public class ReservationController {
     private List<Menu> getReservationMenus() {
         try {
             String reservationOrder = inputView.getOrder();
-            return reservationRequestParser.parseOrders(reservationOrder);
+            return orderInputParser.parseOrders(reservationOrder);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return getReservationMenus();
@@ -60,7 +62,7 @@ public class ReservationController {
     private int getReservationDate() {
         try {
             String reservationDate = inputView.getDate();
-            return reservationRequestParser.parseDate(reservationDate);
+            return dateInputParser.parseDate(reservationDate);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return getReservationDate();

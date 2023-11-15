@@ -2,20 +2,15 @@ package christmas.controller;
 
 import christmas.domain.Reservation;
 import christmas.domain.enums.Menu;
-import christmas.ui.OutputView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class ReservationRequestParser {
+public class OrderInputParser {
     public static final String ILLEGAL_ORDER = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    public static final String ILLEGAL_RESERVATION_DATE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
-
-    private final OutputView outputView;
     private Set<Menu> orderedMenu = new HashSet<>();
-
-    public ReservationRequestParser(OutputView outputView) {
-        this.outputView = outputView;
-    }
 
     public List<Menu> parseOrders(String orders) {
         List<Menu> menus = new ArrayList<>();
@@ -48,16 +43,6 @@ public class ReservationRequestParser {
         return new Order(menu, count);
     }
 
-    public int parseDate(String inputDate) {
-        int reservationDate;
-        try {
-            reservationDate = Integer.parseInt(inputDate);
-            return Reservation.validateDate(reservationDate);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ILLEGAL_RESERVATION_DATE);
-        }
-    }
-
     protected class Order {
 
         private Menu menu;
@@ -84,4 +69,5 @@ public class ReservationRequestParser {
             orderedMenu.add(this.menu);
         }
     }
+
 }
