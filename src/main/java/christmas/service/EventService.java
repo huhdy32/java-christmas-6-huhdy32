@@ -18,7 +18,7 @@ public class EventService {
         this.reservation = reservation;
     }
 
-    public EventProcessedDto createProcessdReservationDto() {
+    public EventProcessedDto createProcessedReservationDto() {
         return new EventProcessedDto(
                 reservation,
                 getTotalOrderAmountBeforeDiscount(),

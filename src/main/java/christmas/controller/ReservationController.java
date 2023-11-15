@@ -33,7 +33,7 @@ public class ReservationController {
             // 이벤트 적용
             eventService = EventService.create(reservation);
             // 적용 결과
-            EventProcessedDto eventProcessedDto = eventService.createProcessdReservationDto();
+            EventProcessedDto eventProcessedDto = eventService.createProcessedReservationDto();
             // 결과 출력
             outputView.printDetails(eventProcessedDto);
         } catch (IllegalStateException e) {
