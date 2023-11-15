@@ -50,7 +50,7 @@ public class EventService {
 
     public List<DiscountEvent> getDisCountEvents() {
         if (eventTarget == false) {
-            return List.of();
+            return List.of(DiscountEvent.NONE);
         }
         return DiscountEvent.getEvents(reservation.getDate());
     }

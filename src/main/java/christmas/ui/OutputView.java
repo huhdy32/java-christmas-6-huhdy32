@@ -2,6 +2,7 @@ package christmas.ui;
 
 import christmas.domain.Reservation;
 import christmas.domain.enums.Menu;
+import christmas.domain.enums.event.DiscountEvent;
 import christmas.domain.enums.event.Gift;
 import christmas.dto.EventProcessedDto;
 import christmas.ui.view.ConsoleView;
@@ -53,20 +54,29 @@ public class OutputView extends ConsoleView {
         Reservation reservation = eventProcessedDto.reservation();
         int date = reservation.getDate();
         List<Menu> menus = reservation.getMenus();
-
         out("<혜택 내역>");
-        if (eventProcessedDto.discountEvents().isEmpty() && eventProcessedDto.gifts() == Gift.NONE) {
-            out("없음");
-            out("");
+        if (isNoneBenefit()) {
             return;
         }
         eventProcessedDto.discountEvents().stream()
                 .forEach(discountEvent ->
-                        out(discountEvent.getName() + ": " + parseNegativeWonFormat(discountEvent.getDiscount(date, menus))));
+                        out(discountEvent.getName()
+                                + ": "
+                                + parseNegativeWonFormat(discountEvent.getDiscount(date, menus))));
         if (eventProcessedDto.gifts() != Gift.NONE) {
             out("증정 이벤트: " + parseNegativeWonFormat(eventProcessedDto.gifts().getBenefitAmount()));
         }
         out("");
+    }
+
+    private boolean isNoneBenefit() {
+        if (eventProcessedDto.discountEvents().contains(DiscountEvent.NONE)
+                && eventProcessedDto.gifts() == Gift.NONE) {
+            out("없음");
+            out("");
+            return true;
+        }
+        return false;
     }
 
     private void printTotalBenefitAmount() {
