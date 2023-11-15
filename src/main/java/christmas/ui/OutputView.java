@@ -59,9 +59,7 @@ public class OutputView extends ConsoleView {
             return;
         }
         eventProcessedDto.discountEvents().stream()
-                .forEach(discountEvent ->
-                        out(discountEvent.getName()
-                                + ": "
+                .forEach(discountEvent -> out(discountEvent.getName() + ": "
                                 + parseNegativeWonFormat(discountEvent.getDiscount(date, menus))));
         if (eventProcessedDto.gifts() != Gift.NONE) {
             out("증정 이벤트: " + parseNegativeWonFormat(eventProcessedDto.gifts().getBenefitAmount()));
