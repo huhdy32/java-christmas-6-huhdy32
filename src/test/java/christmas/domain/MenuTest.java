@@ -20,11 +20,11 @@ public class MenuTest {
                 .isInstanceOf(Menu.class);
     }
 
-    @DisplayName("에러 메시지 확인")
+    @DisplayName("NONE 리턴 확인")
     @ParameterizedTest
-    @ValueSource(strings = {"달달구리양송이", "초코케이스 두개에 아이스크림 얹어주세요"})
+    @ValueSource(strings = {"달달구리양송이", "초코케이크 두개에 아케리카노 얹어주세요"})
     void accessToCategory(String menuName) {
-        assertThatThrownBy(() -> Menu.getMenu(menuName))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(Menu.getMenu(menuName))
+                .isEqualTo(Menu.NONE);
     }
 }
