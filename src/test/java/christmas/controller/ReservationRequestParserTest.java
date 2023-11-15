@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ReservationRequestParserTest {
 
+    ReservationRequestParser reservationRequestParser;
 
-    ReservationRequestParser reservationRequestParser ;
     @BeforeEach
     void initTest() {
         reservationRequestParser = new ReservationRequestParser(new OutputView());
