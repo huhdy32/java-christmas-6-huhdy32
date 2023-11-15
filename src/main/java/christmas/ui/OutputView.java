@@ -34,41 +34,51 @@ public class OutputView extends ConsoleView {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         out("<주문 메뉴>");
         itemCounts.forEach((menu, count) -> out(menu.getMenuName() + " " + itemCounts.get(menu) + "개"));
+        out("");
     }
 
     private void printOrderAmount() {
         out("<할인 전 총주문 금액>");
-        out(parseWonFormat(eventProcessedDto.totalOrderAmount()));
+        out(parsePositiveWonFormat(eventProcessedDto.totalOrderAmount()));
+        out("");
     }
 
     private void printFreeGift() {
         out("<증정 메뉴>");
         out(eventProcessedDto.gifts().getName());
+        out("");
     }
 
     private void printBenefitDetails() {
         Reservation reservation = eventProcessedDto.reservation();
         int date = reservation.getDate();
         List<Menu> menus = reservation.getMenus();
+
         out("<혜택 내역>");
-        eventProcessedDto.discountEvents().stream()
-                .forEach(discountEvent ->
-                        out(discountEvent.getName() + " : " + parseWonFormat(discountEvent.getDiscount(date, menus))));
-        if (eventProcessedDto.gifts() == Gift.NONE) {
+        if (eventProcessedDto.discountEvents().isEmpty() && eventProcessedDto.gifts() == Gift.NONE) {
             out("없음");
+            out("");
             return;
         }
-        out("증정 이벤트 : " + parseWonFormat(eventProcessedDto.gifts().getBenefitAmount()));
+        eventProcessedDto.discountEvents().stream()
+                .forEach(discountEvent ->
+                        out(discountEvent.getName() + ": " + parseNegativeWonFormat(discountEvent.getDiscount(date, menus))));
+        if (eventProcessedDto.gifts() != Gift.NONE) {
+            out("증정 이벤트: " + parseNegativeWonFormat(eventProcessedDto.gifts().getBenefitAmount()));
+        }
+        out("");
     }
 
     private void printTotalBenefitAmount() {
         out("<총혜택 금액>");
-        out(parseWonFormat(eventProcessedDto.totalBenefitAmount()));
+        out(parseNegativeWonFormat(eventProcessedDto.totalBenefitAmount()));
+        out("");
     }
 
     private void printTotalAmount() {
         out("<할인 후 예상 결제 금액>");
-        out(parseWonFormat(eventProcessedDto.getExpectedPaymentAmount()));
+        out(parsePositiveWonFormat(eventProcessedDto.getExpectedPaymentAmount()));
+        out("");
     }
 
     private void printEventBadge() {
@@ -80,7 +90,11 @@ public class OutputView extends ConsoleView {
         out("[ERROR] " + message);
     }
 
-    private String parseWonFormat(int amount) {
+    private String parsePositiveWonFormat(int amount) {
         return String.format("%,d", amount) + "원";
+    }
+
+    private String parseNegativeWonFormat(int amount) {
+        return String.format("%,d", -amount) + "원";
     }
 }

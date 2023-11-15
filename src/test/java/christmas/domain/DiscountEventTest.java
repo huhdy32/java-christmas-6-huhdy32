@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class DiscountEventTest {
 
     @ParameterizedTest
@@ -61,6 +62,7 @@ public class DiscountEventTest {
 
         );
     }
+
     static Stream<Arguments> provide_Menus() {
         return Stream.of(
                 Arguments.of(
@@ -75,13 +77,13 @@ public class DiscountEventTest {
                         List.of(Menu.ICE_CREAM,
                                 Menu.CHOCOLATE_CAKE,
                                 Menu.BARBECUE_RIBS),
-                        6346
+                        6246
                 ),
                 Arguments.of(
                         22,
                         List.of(Menu.T_BONE_STEAK,
                                 Menu.WHITE_MUSHROOM_SOUP),
-                        5223
+                        5123
                 )
         );
     }
